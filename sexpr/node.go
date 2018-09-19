@@ -9,9 +9,9 @@ import (
 
 var (
 	// Most of these are standard operations. "i" is the index operator for
-	// arrays. This slice is to be used as reference and not be mutated. Go does
-	// not support slice constants.
-	OPS = []string{"^", "|", "&", "%", "/", "*", "+", "-", "<<", ">>", "i"}
+	// arrays. This array is to be used as reference and not be mutated. Go does
+	// not support array constants.
+	OPS = [...]string{"^", "|", "&", "%", "/", "*", "+", "-", "<<", ">>", "i"}
 )
 
 // node is any place in a function that branches. It has has an operator, which
