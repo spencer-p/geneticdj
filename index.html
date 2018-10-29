@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>Spooky Music My Computer Made</title>
+	</head>
+	<body>
+		<h1>Spooky Music My Computer Made</h1>
+		<p>Hi, you've reached Spencer's computer. If you'd like to hear some
+		random garbage, please <a href="/api/generate">generate some music</a>.
+		If you're not feeling lucky, feel free to peruse these other options.</p>
+		<p>
+		<ol>
+			{{range .}}
+			<li>
+				<a href="/play/{{.}}"><tt>{{.}}</tt></a>
+			</li>
+			{{end}}
+		</ol>
+		</p>
+	</body>
+</html>
