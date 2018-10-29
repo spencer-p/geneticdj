@@ -41,6 +41,7 @@ func Parse(input string) (Fn, error) {
 
 		switch input[i] {
 		case ' ':
+		case '\n':
 			// Spaces are a no-op.
 
 		case '(':

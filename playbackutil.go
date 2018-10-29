@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/spencer-p/geneticdj/sexpr"
 	"io"
 	"os/exec"
+
+	"github.com/spencer-p/geneticdj/sexpr"
 )
 
 func readAll(file *io.Reader) []sexpr.Fn {
