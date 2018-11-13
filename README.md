@@ -1,5 +1,7 @@
 # Genetic DJ
 
+[Currently running here.](http://54.215.128.40:8080/)
+
 ## About
 
 This is a project to generate music inspired by the short C programs that
