@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"html/template"
+	"log"
 	"math/rand"
 	"net/http"
 	"time"
@@ -41,6 +43,17 @@ func audioHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the function
 	fn, err := sexpr.Parse(fn_text)
 	if err != nil {
+		log.Println("Recvd unparseable function:", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("500 Internal Server Error"))
+		return
+	}
+
+	// Write the audio to a buffer, making sure the fn is valid
+	var wavbuf bytes.Buffer
+	err = sexpr.WriteWav(fn, &wavbuf, 30)
+	if err != nil {
+		log.Println("Function could not be evaluated:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("500 Internal Server Error"))
 		return
@@ -49,14 +62,8 @@ func audioHandler(w http.ResponseWriter, r *http.Request) {
 	// Write the audio
 	w.Header().Set("Content-Type", "audio/x-wav")
 	w.WriteHeader(http.StatusOK)
-
-	err = sexpr.WriteWav(fn, w, 30)
-	if err != nil {
-		// TODO The http response is actually not salvageable at this point.
-		// We've already written stuff to it. AFAIK there is no way to clear it.
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("500 Internal Server Error"))
-		return
+	if _, err := wavbuf.WriteTo(w); err != nil {
+		log.Println("Error writing bytes of audio to http.ResponseWriter:", err)
 	}
 }
 
