@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/spencer-p/geneticdj/sexpr"
+	"github.com/spencer-p/geneticdj/pkg/sexpr"
 )
 
 var (
